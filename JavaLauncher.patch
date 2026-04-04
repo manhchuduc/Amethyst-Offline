@@ -1,9 +1,24 @@
---- /Amethyst-iOS/Natives/JavaLauncher.m	Tue Feb 17 22:12:16 2025
-+++ /Amethyst-iOS/Natives/JavaLauncher.m	Tue Feb 17 22:15:34 2025
+diff --git a/Natives/JavaLauncher.m b/Natives/JavaLauncher.m
+index 3f20f10..728a3ec 100644
+--- a/Natives/JavaLauncher.m
++++ b/Natives/JavaLauncher.m
 @@ -8,6 +8,7 @@
  #include <string.h>
  #include <sys/stat.h>
  #include <unistd.h>
 +#include <mach/mach.h>
-
+ 
  #include "utils.h"
+ 
+@@ -263,11 +264,6 @@ int launchJVM(NSString *username, id launchTarget, int width, int height, int mi
+     margv[++margc] = "-XX:+UnlockExperimentalVMOptions";
+     margv[++margc] = "-XX:+DisablePrimordialThreadGuardPages";
+ 
+-    // On iOS 26, use mirror mapped JIT by default
+-    if (@available(iOS 26.0, *)) {
+-        margv[++margc] = "-XX:+MirrorMappedCodeCache";
+-    }
+-
+     // Disable Forge 1.16.x early progress window
+     margv[++margc] = "-Dfml.earlyprogresswindow=false";
+ 
